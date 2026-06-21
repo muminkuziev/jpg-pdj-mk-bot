@@ -1,0 +1,18 @@
+﻿services:
+  - type: web
+    name: scan2pdf-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install --upgrade pip && pip install --prefer-binary -r requirements.txt
+    startCommand: python bot.py
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: MAX_IMAGES
+        value: 20
+      - key: MAX_FILE_MB
+        value: 10
+      - key: TMP_DIR
+        value: tmp
